@@ -48,9 +48,10 @@ def ingest(conn, path: str, table_name: str):
     else:
         conn.commit()
 
-def aggregate_roas(cur, aggregate_columns: List[str]):
-    """Aggregate ROAS by columns supplied in aggregate_columns"""
+def aggregate_roas(cur, by: List[str]):
+    """Aggregate ROAS by columns supplied in b"""
     # Validate input param
+    aggregate_columns = by
     valid_aggregate_columns = {'country', 'priority'}
     invalid_aggregate_columns = set(aggregate_columns) - valid_aggregate_columns
     if invalid_aggregate_columns:
@@ -86,16 +87,13 @@ def main():
         ingest(conn, 'search_terms.csv', 'search_terms')
 
         with conn.cursor() as cur:
-            aggregate_columns = ['country', 'priority']
-            aggregate_roas(cur, aggregate_columns)
+            aggregate_roas(cur, by=['country', 'priority'])
             print(cur.fetchall())
 
-            aggregate_columns = ['country']
-            aggregate_roas(cur, aggregate_columns)
+            aggregate_roas(cur, by=['country'])
             print(cur.fetchall())
 
-            aggregate_columns = ['priority']
-            aggregate_roas(cur, aggregate_columns)
+            aggregate_roas(cur, by=['priority'])
             print(cur.fetchall())
 
 if __name__ == '__main__':

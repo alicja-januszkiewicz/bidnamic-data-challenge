@@ -7,7 +7,7 @@
 3. Run `main.py` as a python script to ingest and aggregate the data.
 
 ## Performance
-Data ingestion takes around 2.5s as measured with `timeit()` on a Ryzen 1700X. `aggregate_roas()` takes on the order of x10^-8 seconds.
+Data ingestion takes around 2.5s as measured with `timeit()` on a Ryzen 1700X. `aggregate_roas()` takes around 0.8 seconds per alias field.
 The `profile.py` module facilitates measuring these values.
 
 ## Ingest upsert strategy

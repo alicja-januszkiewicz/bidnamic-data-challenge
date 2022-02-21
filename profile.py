@@ -14,10 +14,9 @@ def profile():
         print("Average time taken to ingest()", time_to_execute / number_of_calls, " seconds.")
 
         with conn.cursor() as cur:
-            aggregate_columns = ['country', 'priority']
-            number_of_calls = 10000000
-            time_to_execute = timeit.timeit(lambda: (aggregate_roas,(cur, aggregate_columns)), number=number_of_calls)
-            print("Average time taken to aggregate():", time_to_execute / number_of_calls, " seconds.")
+            number_of_calls = 100
+            time_to_execute = timeit.timeit(lambda: aggregate_roas(cur, by=['country', 'priority']), number=number_of_calls)
+            print("Average time taken to aggregate_roas():", time_to_execute / number_of_calls, " seconds.")
 
 if __name__ == '__main__':
     profile()
