@@ -9,7 +9,7 @@ def ingest_all(conn):
 
 def profile():
     with psycopg2.connect(**conn_options) as conn:
-        number_of_calls = 1
+        number_of_calls = 100
         time_to_execute = timeit.timeit(lambda: ingest_all(conn), number=number_of_calls)
         print("Average time taken to ingest()", time_to_execute / number_of_calls, " seconds.")
 
