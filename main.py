@@ -49,7 +49,7 @@ def ingest(conn, path: str, table_name: str):
         conn.commit()
 
 def aggregate_roas(cur, by: List[str]):
-    """Aggregate ROAS by columns supplied in b"""
+    """Aggregate ROAS by columns supplied in by"""
     # Validate input param
     aggregate_columns = by
     valid_aggregate_columns = {'country', 'priority'}
