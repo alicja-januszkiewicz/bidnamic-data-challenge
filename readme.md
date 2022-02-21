@@ -2,7 +2,7 @@
 - `psycopg2`
 
 ## How to run:
-1. Set up a database to hold the data. See `prepare_db.py` for an example query to create the required columns on a newly set up database.
+1. Set up a database to hold the data. See `prepare_db.py` for an example query to create the required tables on a newly set up database.
 2. Fill out `conn_options` in main.py as required.
 3. Run `main.py` as a python script to ingest and aggregate the data.
 
@@ -18,3 +18,6 @@ As it stands the `main.py` script will simply ignore rows violating any unique o
 The status columns seem to only ever contain two values, `ENABLED` and `REMOVED`. One could implement these sql columns to be of boolean type to save memory. However, this would require editing the `ingest()` function to map these values from strings to booleans. The speed-memory tradeoff might not be worth it.
 ### `aggregate()`
 The `aggregate()` function can be easily extended to allow aggregating by more fields of the alias column; One only needs to append the field name to `valid_aggregate_columns` and the name with its position to `alias_field_to_position_mapper`. For example adding in `'structure_value'` and `{'structure_value': 4}` respectively would allow the following usage: `aggregate(cursor, ['country', 'structure_value'])`.
+
+## ER Diagram
+<img src="ER Diagram.png">
