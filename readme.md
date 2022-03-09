@@ -11,7 +11,7 @@ Data ingestion takes around 2.5s as measured with `timeit()` on a Ryzen 1700X. `
 The `profile.py` module facilitates measuring these values.
 
 ## Ingest upsert strategy
-As it stands the `main.py` script will simply ignore rows violating any unique or primary key constraints. There is an alternative approach implemented in `alternative_ingest.py` which instead will update the rows with new values. To use it, uncomment line 79 (`# from alternative_ingest import ingest`) in `main.py`.
+As it stands the `main.py` script will simply ignore rows violating any unique or primary key constraints. There is an alternative approach implemented in `alternative_ingest.py` which instead will update the rows with new values. To use it, uncomment line 3 (`# from alternative_ingest import ingest`) in `main.py`.
 
 ## Notes on extending the functionality
 ### `status` columns
