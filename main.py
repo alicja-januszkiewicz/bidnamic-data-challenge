@@ -1,5 +1,6 @@
-import psycopg2
 from typing import List
+import psycopg2
+# from alternative_ingest import ingest
 
 conn_options = {
     'dbname': 'bidnamic',
@@ -76,8 +77,7 @@ def aggregate_roas(cur, by: List[str]):
                 GROUP BY {','.join(aggregate_columns)}
                 ORDER BY ROAS ASC
                 """)
-
-# from alternative_ingest import ingest
+    return cur.fetchall()
 
 def main():
     """Load files into the database and run the aggregate queries."""
@@ -87,14 +87,14 @@ def main():
         ingest(conn, 'search_terms.csv', 'search_terms')
 
         with conn.cursor() as cur:
-            aggregate_roas(cur, by=['country', 'priority'])
-            print(cur.fetchall())
+            roas = aggregate_roas(cur, by=['country', 'priority'])
+            print(roas)
 
-            aggregate_roas(cur, by=['country'])
-            print(cur.fetchall())
+            roas = aggregate_roas(cur, by=['country'])
+            print(roas)
 
-            aggregate_roas(cur, by=['priority'])
-            print(cur.fetchall())
+            roas = aggregate_roas(cur, by=['priority'])
+            print(roas)
 
 if __name__ == '__main__':
     main()
